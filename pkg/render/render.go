@@ -7,47 +7,47 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/fiyuang/golang-web-app/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
+var app *config.AppConfig
+
+// NewTemplates sets the config for the templates
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
+
 // RenderTemplate renders templates using html/template.
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
-	// _, err := RenderTemplateTest(w)
-	// if err != nil {
-	// 	fmt.Println("error getting template cache:", err)
-	// }
-
-	tc, err := CreateTemplateCache(w)
-	if err != nil {
-		log.Fatal(err)
+	var tc map[string]*template.Template
+	if app.UseCache {
+		// get the template cache from the app config
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
 	}
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template from template cache")
 	}
 
 	buf := new(bytes.Buffer)
 
 	_ = t.Execute(buf, nil)
 
-	_, err = buf.WriteTo(w)
+	_, err := buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("Error writing template a browser:", err)
 	}
-
-	// parsedTemplate, _ := template.ParseFiles("./templates/" + tmpl)
-	// err := parsedTemplate.Execute(w, nil)
-	// if err != nil {
-	// 	fmt.Println("error parsing template:", err)
-	// 	return
-	// }
 }
 
 // CreateTemplateCache creates a template cache as a map
-func CreateTemplateCache(w http.ResponseWriter) (map[string]*template.Template, error) {
+func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}
 
