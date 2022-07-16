@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/fiyuang/golang-web-app/pkg/config"
-	"github.com/fiyuang/golang-web-app/pkg/models"
+	"github.com/fiyuang/golang-web-app/internal/config"
+	"github.com/fiyuang/golang-web-app/internal/models"
 	"github.com/justinas/nosurf"
 )
 
