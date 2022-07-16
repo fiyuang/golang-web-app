@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/fiyuang/golang-web-app/pkg/config"
-	"github.com/fiyuang/golang-web-app/pkg/models"
-	"github.com/fiyuang/golang-web-app/pkg/render"
+	"github.com/fiyuang/golang-web-app/internal/config"
+	"github.com/fiyuang/golang-web-app/internal/models"
+	"github.com/fiyuang/golang-web-app/internal/render"
 )
 
 var Repo *Repository

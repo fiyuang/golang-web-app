@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/fiyuang/golang-web-app/pkg/config"
-	"github.com/fiyuang/golang-web-app/pkg/handlers"
-	"github.com/fiyuang/golang-web-app/pkg/render"
+	"github.com/fiyuang/golang-web-app/internal/config"
+	"github.com/fiyuang/golang-web-app/internal/handlers"
+	"github.com/fiyuang/golang-web-app/internal/render"
 )
 
 const portNumber = ":9090"
